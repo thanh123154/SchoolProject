@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@amcharts/amcharts5": "^5.3.7",
-    "@emotion/react": "^11.10.5",
+    "@emotion/react": "^11.10.8",
     "@goongmaps/goong-js": "^1.0.9",
     "@mantine/carousel": "^5.10.4",
     "@mantine/core": "^5.10.4",
@@ -27,6 +27,8 @@
     "@next/font": "^13.1.6",
     "@prisma/client": "^4.9.0",
     "@svgr/webpack": "^6.5.1",
+    "@syncfusion/ej2-icons": "^21.1.37",
+    "@syncfusion/ej2-react-schedule": "^21.1.41",
     "@tabler/icons": "^1.119.0",
     "@tanstack/react-query": "^4.20.0",
     "@tinymce/tinymce-react": "^4.3.0",

@@ -1,27 +1,33 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-
-import { Box } from "@mantine/core";
-
+import { Box, Flex } from "@mantine/core";
 import { Header } from "../layouts";
-import { Hero } from "../features/Home";
-import { Listing } from "../features/Home/Listing";
+import { CalendarMenu } from "../features/dashboard/CalendarMenu";
+import { CalendarMain } from "../features/dashboard/CalendarMain";
+import { CalendarUpcoming } from "../features/dashboard/CalendarUpcoming";
+import { useSession } from "next-auth/react";
+import { LoginBox } from "../features/auth/LoginBox";
 
 const Home: NextPage = () => {
+
+  const { data: sessionData } = useSession();
   return (
     <>
       <Head>
-        <title>Webook</title>
+        <title>SchoolUtils</title>
         <meta name="description" content="Zenithereum" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      {sessionData ? <Header /> : <></>}
 
       <Box>
-        <Hero />
-
-        <Listing />
+        {
+          sessionData ? <CalendarMain /> : 
+          <Flex sx={{width: "100vw", height: "100vh"}} direction="column" justify={"center"} align={"center"}>
+            <LoginBox />
+          </Flex>
+        }
       </Box>
 
       {/* <Footer /> */}

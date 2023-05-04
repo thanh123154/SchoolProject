@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 
 import { api } from "../utils/api";
 
+import "../App.css"
 import "../styles/globals.css";
 import { ThemeProvider } from "../themes";
 

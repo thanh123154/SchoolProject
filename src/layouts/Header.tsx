@@ -45,10 +45,11 @@ const _Header = () => {
       pos="sticky"
       top={0}
       sx={{
-        zIndex: 10,
+        zIndex: 1000000000000,
         boxShadow: "0px 0px 10px #00000",
       }}
-      // bg="#fff"
+      bg = {theme === 'dark' ? "#111214" : '#5f5f5f'}
+      
     >
       <Box
         maw="134rem"
@@ -56,10 +57,10 @@ const _Header = () => {
         py={{ base: 20, sm: 0 }}
         px={{ base: 30, sm: 100 }}
       >
-        <Flex h={{ base: "auto", sm: "8rem" }} align="center">
+        <Flex sx={{paddingTop: 20, paddingBottom: 20}} align="center">
           <Group position="apart" w="100%">
             <Link href={router.asPath.includes("/host") ? "/host" : "/"}>
-              <Title fz={30}>WEBOOK</Title>
+              <Title fz={30}>SCHOOL UTILS</Title>
             </Link>
 
             {/* <NavMenu /> */}
@@ -92,7 +93,7 @@ const _Header = () => {
               </Box>
             </Box>
 
-            <Flex gap={"2rem"} fz={"2rem"}>
+            <Flex gap={"24px"} fz={"2rem"}>
               <Switch
                 size="md"
                 onChange={(value) => {
@@ -106,15 +107,19 @@ const _Header = () => {
 
               {/* <Button>Switch to hosting</Button> */}
 
-              <Indicator label={count} overflowCount={10} inline size={22}>
+              {/* <Indicator label={count} overflowCount={10} inline size={22}>
                 <ActionIcon color="cyan">
                   <CgBell size={25} />
                 </ActionIcon>
-              </Indicator>
-
-              <Text fz={18}>
-                {sessionData && <span>Hello {sessionData.user?.name}</span>}
-              </Text>
+              </Indicator> */}
+              {
+                sessionData ? (
+                  <Text fz={18}>
+                    {sessionData && <span>Hello {sessionData.user?.name}</span>}
+                  </Text>
+                ) : <></>
+              }
+              
               <MenuDropDown index={123} />
             </Flex>
           </Group>
