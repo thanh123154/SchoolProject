@@ -1,10 +1,23 @@
-@import "../node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/bootstrap5.css";
-@import "../node_modules/@syncfusion/ej2-calendars/styles/bootstrap5.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/bootstrap5.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/bootstrap5.css";
-@import "../node_modules/@syncfusion/ej2-lists/styles/bootstrap5.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/bootstrap5.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/bootstrap5.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/bootstrap5.css";
-@import "../node_modules/@syncfusion/ej2-react-schedule/styles/bootstrap5.css";
+@import "../node_modules/@syncfusion/ej2-base/styles/material-dark.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material-dark.css";
+@import "../node_modules/@syncfusion/ej2-calendars/styles/material-dark.css";
+@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material-dark.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material-dark.css";
+@import "../node_modules/@syncfusion/ej2-lists/styles/material-dark.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/material-dark.css";
+@import "../node_modules/@syncfusion/ej2-popups/styles/material-dark.css";
+@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material-dark.css";
+@import "../node_modules/@syncfusion/ej2-react-schedule/styles/material-dark.css";
+@import "../node_modules/@syncfusion/ej2-icons/styles/material.css";
+/* Set the background color of the Scheduler component to a dark color */
+/* .e-schedule {
+	background-color: #343a40;
+} */
+  
+/* Set the foreground color of the Scheduler component to a light color */
+/* .e-schedule .e-header,.e-schedule .e-table-container {
+	color: #f8f9fa;
+} */
+[class^="e-"], [class*=" e-"]::before {
+	font-family: e-icons;
+  }

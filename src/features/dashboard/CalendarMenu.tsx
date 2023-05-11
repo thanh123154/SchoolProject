@@ -79,6 +79,7 @@ export const CalendarMenu = (props: Array<any>) => {
 								<IconPencil fill={`${isEditingCalendarList ? "gray" : ""}`}/>
 							</Button>
 							<Button
+								type="button"
 								sx={(theme) => ({
 									borderRadius: "8px",
 									paddingLeft: "4px",
