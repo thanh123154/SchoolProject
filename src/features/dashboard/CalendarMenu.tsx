@@ -1,14 +1,14 @@
-import { Box, Button, Flex } from '@mantine/core'
+import { Box, Button, Flex, CloseButton } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
-import { IconPlus } from '@tabler/icons'
+import { IconPencil, IconPlus } from '@tabler/icons'
 import react, { useState } from 'react'
 import { CreateScheduleModal } from '../../layouts/components/CreateScheduleModal';
 
 
 export const CalendarMenu = (props: Array<any>) => {
 	const [opened, {open, close}] = useDisclosure(false);
+	const [isEditingCalendarList, setIsEditingCalendarList] = useState(false)
 
-	console.log(props.calendarList)
 	const selectCalendar = () => {
 
 	}
@@ -24,11 +24,21 @@ export const CalendarMenu = (props: Array<any>) => {
 						padding: "16px",
 						":hover": {
 							backgroundColor: theme.colorScheme === 'dark' ? "#494949" : "#808080",
-						}
+						},
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
 					})}
 					onClick={() => selectCalendar()}
 				>
-					{calendar.name}
+					<Box sx={{minHeight: "28px"}}>
+						{calendar.name}
+					</Box>
+					{
+						isEditingCalendarList ? (
+							<CloseButton />
+						) : <></>
+					}
 				</Box>
 			)
 		})
@@ -54,19 +64,34 @@ export const CalendarMenu = (props: Array<any>) => {
 				})}>
 					<Flex justify="space-between" align="center" gap={"32px"}>
 						<div>Calendars</div>
-						<Button
-							sx={(theme) => ({
-								borderRadius: "8px",
-								paddingLeft: "8px",
-								paddingRight: "8px",
-							})}
-							color="dark"
-							variant='white'
-							rightIcon={<IconPlus />}
-							onClick={open}
-						>
-							Create
-						</Button>
+						<Box sx={{display: "flex", gap: "8px"}}>
+							<Button
+								sx={(theme) => ({
+									borderRadius: "8px",
+									paddingLeft: "4px",
+									paddingRight: "4px",
+								})}
+								color="dark"
+								variant='subtle'
+								//rightIcon={<IconPlus />}
+								onClick={() => setIsEditingCalendarList(!isEditingCalendarList)}
+							>
+								<IconPencil fill={`${isEditingCalendarList ? "gray" : ""}`}/>
+							</Button>
+							<Button
+								sx={(theme) => ({
+									borderRadius: "8px",
+									paddingLeft: "4px",
+									paddingRight: "4px",
+								})}
+								color="dark"
+								variant='white'
+								// rightIcon={<IconPlus />}
+								onClick={open}
+							>
+								Create
+							</Button>
+						</Box>
 					</Flex>
 				</Box>
 				{renderCalendars()}
