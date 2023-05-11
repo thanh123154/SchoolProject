@@ -1,6 +1,6 @@
 import { Box, Paper } from '@mantine/core'
 import react, { useState } from 'react'
-import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, Inject } from '@syncfusion/ej2-react-schedule';
+import { ScheduleComponent, Day, Week, WorkWeek, Month, Inject, Agenda } from '@syncfusion/ej2-react-schedule';
 
 export const CalendarScheduler = () => {
 	const [scheduleData, setScheduleData] = useState<Array<Object>>([
@@ -12,15 +12,29 @@ export const CalendarScheduler = () => {
 		// 	IsAllDay: false
 		// },
 	])
-	const eventSettings = { dataSource: scheduleData }
+	const eventSettings = { 
+		dataSource: scheduleData,
+	}
 	
+	const handleScheduleChange = (event) => {
+		//console.log(event)
+		if(event.addedRecords?.length > 0) {
+			console.log({addedRecords: event.addedRecords})
+		}
+		if(event.deletedRecords?.length > 0) {
+			console.log({deletedRecords: event.deletedRecords})
+		}
+		if(event.changedRecords?.length > 0) {
+			console.log({changedRecords: event.changedRecords})
+		}
+	}
+
 	return (
 		<ScheduleComponent 
-			actionComplete={(e) => console.log(e)}
-			selectedDate= {new Date(2018, 1, 15)}
+			actionComplete={(e) => handleScheduleChange(e)}
 			eventSettings={eventSettings}
 		>
-			<Inject services={[Day, Week, WorkWeek, Month]} />
+			<Inject services={[Day, Week, WorkWeek, Month, Agenda]} />		
 		</ScheduleComponent>
 	)
 }
