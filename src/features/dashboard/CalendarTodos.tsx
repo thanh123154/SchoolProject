@@ -80,6 +80,20 @@ export const CalendarTodos = () => {
 					<Flex justify="space-between" align="center">
 						<div>To Dos</div>
 						<Box sx={{display: "flex", gap: "8px"}}>
+							{isEditingTodoList && <Button
+								type="button"
+								sx={(theme) => ({
+									borderRadius: "8px",
+									paddingLeft: "4px",
+									paddingRight: "4px",
+								})}
+								color="red"
+								variant='filled'
+								// rightIcon={<IconPlus />}
+								onClick={() => console.log("delete completed")}
+							>
+								Delete Completed
+							</Button>}
 							<Button
 								sx={(theme) => ({
 									borderRadius: "8px",
@@ -107,20 +121,6 @@ export const CalendarTodos = () => {
 							>
 								<IconPlus />
 							</Button>
-							{isEditingTodoList && <Button
-								type="button"
-								sx={(theme) => ({
-									borderRadius: "8px",
-									paddingLeft: "4px",
-									paddingRight: "4px",
-								})}
-								color="red"
-								variant='filled'
-								// rightIcon={<IconPlus />}
-								onClick={() => console.log("delete completed")}
-							>
-								Delete Completed
-							</Button>}
 						</Box>
 					</Flex>
 				</Box>
