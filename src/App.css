@@ -20,4 +20,15 @@
 } */
 [class^="e-"], [class*=" e-"]::before {
 	font-family: e-icons;
-  }
+}
+
+.e-schedule {
+	border-top: none;
+	border-left: 1px solid #292929;
+	border-right: 1px solid #292929;
+	border-bottom: 1px solid #292929;
+}
+
+.e-toolbar .e-toolbar-items {
+	border-radius: 0;
+}
