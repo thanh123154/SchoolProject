@@ -7,40 +7,46 @@ import { CreateTodoModal } from '../../layouts/components/CreateTodoModal'
 
 const Dummy_TodoList = [
 	{
-		task: "Do Homework",
+		task: "Finish essay on the importance of exercise for maintaining a healthy lifestyle",
 		priority: "high",
 		isCompleted: false,
 		uuid: 0,
-	},
-	{
-		task: "Clean the house",
+	  },
+	  {
+		task: "Complete project proposal for new client",
+		priority: "high",
+		isCompleted: true,
+		uuid: 1,
+	  },
+	  {
+		task: "Buy groceries for the week and meal prep for lunches",
 		priority: "medium",
 		isCompleted: false,
-		uuid: 1,
-	},
-	{
-		task: "Eat lunch",
-		priority: "low",
-		isCompleted: false,
 		uuid: 2,
-	},
-	{
-		task: "Take a shower",
-		priority: "high",
+	  },
+	  {
+		task: "Schedule appointment with dentist for annual cleaning and check-up",
+		priority: "low",
 		isCompleted: false,
 		uuid: 3,
-	},
-	{
-		task: "Eat Dinner",
-		priority: "low",
+	  },
+	  {
+		task: "Research and book flights for upcoming vacation",
+		priority: "medium",
 		isCompleted: false,
 		uuid: 4,
-	},
-	{
-		task: "Take out the trash",
-		priority: "low",
-		isCompleted: true,
+	  },
+	  {
+		task: "Take dog to vet for annual vaccinations and check-up",
+		priority: "high",
+		isCompleted: false,
 		uuid: 5,
+	  },
+	  {
+		task: "Complete the project proposal document and submit it before the deadline",
+		priority: "high",
+		isCompleted: true,
+		uuid: 7,
 	}
 ]
 
