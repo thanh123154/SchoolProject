@@ -5,12 +5,13 @@ import react, { useState } from 'react'
 import { CreateScheduleModal } from '../../layouts/components/CreateScheduleModal';
 
 
-export const CalendarMenu = (props: Array<any>) => {
+export const CalendarMenu = (props) => {
 	const [opened, {open, close}] = useDisclosure(false);
 	const [isEditingCalendarList, setIsEditingCalendarList] = useState(false)
 
-	const selectCalendar = () => {
-
+	const selectCalendar = (id) => {
+		const selectedCalendar = props.calendarList.filter((calendar) => calendar.uuid === id)
+		props._setSelectedSchedule(selectedCalendar[0])
 	}
 
 	const renderCalendars = () => {
@@ -19,7 +20,9 @@ export const CalendarMenu = (props: Array<any>) => {
 				<Box 
 					key={index} 
 					sx={(theme) => ({
-						backgroundColor: theme.colorScheme === 'dark' ? "#2a2a2b" : "#808080",
+						backgroundColor: theme.colorScheme === 'dark' 
+										? calendar.uuid === props.selectedSchedule?.uuid ? "#3f3f41" : "#2a2a2b" 
+										: "#808080",
 						cursor: "pointer",
 						padding: "16px",
 						":hover": {
@@ -28,10 +31,11 @@ export const CalendarMenu = (props: Array<any>) => {
 						display: "flex",
 						justifyContent: "space-between",
 						alignItems: "center",
+						transition: "ease-in-out 250ms"
 					})}
-					onClick={() => selectCalendar()}
+					onClick={() => selectCalendar(calendar.uuid)}
 				>
-					<Box sx={{minHeight: "28px"}}>
+					<Box sx={{minHeight: "28px", display: "flex", alignItems: "center"}}>
 						{calendar.name}
 					</Box>
 					{
