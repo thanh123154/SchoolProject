@@ -31,7 +31,7 @@ const _Header = () => {
   const { data: sessionData } = useSession();
 
   //console.log(router, "test mode");
-
+  
   const [count, setCount] = useState(9);
 
   const [theme, setTheme] = useLocalStorage<ColorScheme>({
@@ -46,6 +46,7 @@ const _Header = () => {
       pos="sticky"
       top={0}
       sx={{
+        zIndex: 1000000000000,
         boxShadow: "0px 0px 10px #00000",
       }}
       bg = {theme === 'dark' ? "#111214" : '#5f5f5f'}
