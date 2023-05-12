@@ -22,7 +22,7 @@ export const CreateScheduleModal = (props) => {
 				<TextInput 
 					value={scheduleName} 
 					onChange={(event) => setScheduleName(event.currentTarget.value)} 
-					placeholder='Schedule Name' 
+					placeholder='Schedule Name...' 
 					rightSection={scheduleName && <CloseButton onClick={() => setScheduleName('')}/>}
 				/>
 				<Box sx={{display: "flex", justifyContent: "flex-end"}}>

@@ -14,6 +14,11 @@ export const CalendarMenu = (props) => {
 		props._setSelectedSchedule(selectedCalendar[0])
 	}
 
+	const handleDeleteCalendar = (event, id) => {
+		event.stopPropagation();
+		console.log(`deleted ${id}`)
+	}
+
 	const renderCalendars = () => {
 		const calendarToRender = props.calendarList.map((calendar, index) => {
 			return (
@@ -40,7 +45,7 @@ export const CalendarMenu = (props) => {
 					</Box>
 					{
 						isEditingCalendarList ? (
-							<CloseButton />
+							<CloseButton onClick={(e) => handleDeleteCalendar(e, calendar.uuid)}/>
 						) : <></>
 					}
 				</Box>
@@ -59,7 +64,7 @@ export const CalendarMenu = (props) => {
 			<CreateScheduleModal opened={opened} open={open} close={close}/>
 			<Box sx={(theme) => ({
 				backgroundColor: theme.colorScheme === 'dark' ? "#2a2a2b" : "#808080",
-				width: "20%",
+				// width: "20%",
 				//padding: "16px"
 			})}>
 				<Box sx={(theme) => ({

@@ -1,8 +1,8 @@
-import { Box, Flex } from '@mantine/core'
+import { Box, Flex, Grid } from '@mantine/core'
 import react, { useState } from 'react'
 import { CalendarScheduler } from './CalendarScheduler'
 import { CalendarMenu } from './CalendarMenu'
-import { CalendarUpcoming } from './CalendarUpcoming'
+import { CalendarTodos } from './CalendarTodos'
 
 const placeholder_calendarList = [
 	{
@@ -75,15 +75,19 @@ export const CalendarMain = () => {
 	const [calendarList, setCalendarList] = useState(placeholder_calendarList)
 
 	return (
-		<Flex sx={{minHeight: "100vh"}}>
+		<Box sx={{
+			minHeight: "100vh",
+			display: "grid",
+			gridTemplateColumns: "auto 1fr 20%",
+		}}>
 			<CalendarMenu calendarList={calendarList} _setSelectedSchedule={setSelectedSchedule} selectedSchedule={selectedSchedule}/>    
 			<Box sx={(theme) => ({
 				padding: "0",
-				width: "100%"
+				// width: "100%"
 			})}>
 				<CalendarScheduler selectedSchedule={selectedSchedule}/>
 			</Box>
-			<CalendarUpcoming />
-		</Flex>
+			<CalendarTodos />
+		</Box>
 	)
 }
