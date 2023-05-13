@@ -94,9 +94,11 @@ export const CalendarMenu = (props) => {
 									paddingLeft: "4px",
 									paddingRight: "4px",
 								})}
+								style={{
+									textTransform: 'none',
+								}}
 								color="dark"
 								variant='white'
-								// rightIcon={<IconPlus />}
 								onClick={open}
 							>
 								Create

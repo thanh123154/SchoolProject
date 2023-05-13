@@ -87,15 +87,17 @@ export const CalendarTodos = () => {
 						<div>To Dos</div>
 						<Box sx={{display: "flex", gap: "8px"}}>
 							{isEditingTodoList && <Button
-								type="button"
-								sx={(theme) => ({
+								sx={{
 									borderRadius: "8px",
 									paddingLeft: "4px",
 									paddingRight: "4px",
-								})}
+								}}
+								style={{ 
+									textTransform: 'none',
+								}}
 								color="red"
-								variant='filled'
-								// rightIcon={<IconPlus />}
+								uppercase={false}
+								variant='outline'
 								onClick={() => console.log("delete completed")}
 							>
 								Delete Completed
