@@ -4,12 +4,11 @@ import { ScheduleComponent, Day, Week, WorkWeek, Month, Inject, Agenda, DragAndD
 
 export const CalendarScheduler = (props) => {
 	const [scheduleData, setScheduleData] = useState(props.selectedSchedule?.data)
+
 	useEffect(() => {
 		setScheduleData(props.selectedSchedule?.data)
 	}, [props.selectedSchedule?.data])
-	const eventSettings = { 
-		dataSource: scheduleData,
-	}
+
 	
 	const handleScheduleChange = (event) => {
 		if(event.requestType == "dateNavigate") return
@@ -24,12 +23,16 @@ export const CalendarScheduler = (props) => {
 			console.log({changedRecords: event.changedRecords})
 		}
 	}
+	
+	const eventSettings = { 
+		dataSource: scheduleData,
+	}
 
 	return (
 		<ScheduleComponent 
 			actionComplete={(e) => handleScheduleChange(e)}
 			eventSettings={eventSettings}
-			allowDragAndDrop={true}
+			allowDragAndDrop={true}		
 		>
 			<Inject services={[Day, Week, WorkWeek, Month, Agenda, DragAndDrop]} />		
 		</ScheduleComponent>
