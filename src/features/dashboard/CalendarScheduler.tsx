@@ -1,6 +1,6 @@
 import { Box, Paper } from '@mantine/core'
 import react, { useEffect, useState } from 'react'
-import { ScheduleComponent, Day, Week, WorkWeek, Month, Inject, Agenda } from '@syncfusion/ej2-react-schedule';
+import { ScheduleComponent, Day, Week, WorkWeek, Month, Inject, Agenda, DragAndDrop } from '@syncfusion/ej2-react-schedule';
 
 export const CalendarScheduler = (props) => {
 	const [scheduleData, setScheduleData] = useState(props.selectedSchedule?.data)
@@ -29,8 +29,9 @@ export const CalendarScheduler = (props) => {
 		<ScheduleComponent 
 			actionComplete={(e) => handleScheduleChange(e)}
 			eventSettings={eventSettings}
+			allowDragAndDrop={true}
 		>
-			<Inject services={[Day, Week, WorkWeek, Month, Agenda]} />		
+			<Inject services={[Day, Week, WorkWeek, Month, Agenda, DragAndDrop]} />		
 		</ScheduleComponent>
 	)
 }
