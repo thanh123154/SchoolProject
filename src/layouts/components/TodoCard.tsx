@@ -47,7 +47,7 @@ export const TodoCard = (props) => {
 			}}>
 				<Checkbox 
 					checked={isChecked} 
-					onChange={(event) => setIsChecked(event.currentTarget.checked)}
+					onChange={(event) => setIsChecked(event.currentTarget.checked)} //Todo: make a function, update database when check, when processing change checkbox to loading
 				/>
 				{
 					props.isEditingTodo ? <IconTrash width={"20px"} height={"20px"} cursor={"pointer"} onClick={() => handleDeleteTodo(props.todo.uuid)}/> : <></>
