@@ -60,10 +60,21 @@ const _Header = () => {
       >
         <Flex sx={{paddingTop: 20, paddingBottom: 20}} align="center">
           <Group position="apart" w="100%">
-            <Link href={router.asPath.includes("/host") ? "/host" : "/"}>
-              <Title fz={30}>SCHOOL UTILS</Title>
-            </Link>
-
+            <Box sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "32px"
+            }}>
+              <Link href={router.asPath.includes("/host") ? "/host" : "/"}>
+                <Title fz={30}>SCHOOL UTILS</Title>
+              </Link>
+              <Link href={"/flashCards"}>
+                <Title fz={16}>Flash Cards</Title>
+              </Link>
+              <Link href={"/flashCards"}>
+                <Title fz={16}>Pomodoro</Title>
+              </Link>
+            </Box>
             {/* <NavMenu /> */}
             {/* <SearchBarSpecial index={1} /> */}
 

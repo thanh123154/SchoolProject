@@ -9,11 +9,6 @@ export const CalendarMenu = (props) => {
 	const [opened, {open, close}] = useDisclosure(false);
 	const [isEditingCalendarList, setIsEditingCalendarList] = useState(false)
 
-	const selectCalendar = (id) => {
-		const selectedCalendar = props.calendarList.filter((calendar) => calendar.uuid === id)
-		props._setSelectedSchedule(selectedCalendar[0])
-	}
-
 	const handleDeleteCalendar = (event, id) => {
 		event.stopPropagation();
 		console.log(`deleted ${id}`)
@@ -38,7 +33,7 @@ export const CalendarMenu = (props) => {
 						alignItems: "center",
 						transition: "ease-in-out 250ms"
 					})}
-					onClick={() => selectCalendar(calendar.uuid)}
+					onClick={() => props._setSelectedSchedule(calendar)}
 				>
 					<Box sx={{minHeight: "28px", display: "flex", alignItems: "center"}}>
 						{calendar.name}

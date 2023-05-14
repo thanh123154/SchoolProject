@@ -76,7 +76,7 @@ export const CalendarMain = () => {
 
 	return (
 		<Box sx={{
-			minHeight: "100vh",
+			minHeight: "calc(100vh - 79px)",
 			display: "grid",
 			gridTemplateColumns: "auto 1fr 20%",
 		}}>

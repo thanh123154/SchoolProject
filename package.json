@@ -57,6 +57,7 @@
     "react-input-mask": "^2.0.4",
     "superjson": "1.9.1",
     "tinymce": "^6.3.2",
+    "truncate": "^3.0.0",
     "zod": "^3.20.2",
     "zustand": "^4.3.7"
   },
