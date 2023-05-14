@@ -2,9 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { Box, Flex } from "@mantine/core";
 import { Header } from "../layouts";
-import { CalendarMenu } from "../features/dashboard/CalendarMenu";
 import { CalendarMain } from "../features/dashboard/CalendarMain";
-import { CalendarUpcoming } from "../features/dashboard/CalendarTodos";
 import { useSession } from "next-auth/react";
 import { LoginBox } from "../features/auth/LoginBox";
 
