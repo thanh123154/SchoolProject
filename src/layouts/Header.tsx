@@ -71,7 +71,7 @@ const _Header = () => {
               <Link href={"/flashCards"}>
                 <Title fz={16}>Flash Cards</Title>
               </Link>
-              <Link href={"/flashCards"}>
+              <Link href={"/pomodoro"}>
                 <Title fz={16}>Pomodoro</Title>
               </Link>
             </Box>
