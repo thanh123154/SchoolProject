@@ -35,7 +35,7 @@ export const MenuDropDown: React.FC<Props> = ({ index }) => {
   return (
     <Menu onChange={toggle} trigger={"click"} shadow="md" width={200}>
       <Menu.Target>
-        <ActionIcon color="green">
+        <ActionIcon color="lightgray">
           <Burger opened={opened} onClick={toggle} aria-label={label} />
         </ActionIcon>
       </Menu.Target>
@@ -78,11 +78,6 @@ export const MenuDropDown: React.FC<Props> = ({ index }) => {
         <Link href={"/profile"}>
           {" "}
           <Menu.Item icon={<AiFillSetting />}>Profile</Menu.Item>
-        </Link>
-
-        <Link href={"/host/booking-status"}>
-          {" "}
-          <Menu.Item icon={<AiFillSetting />}>Booking Status</Menu.Item>
         </Link>
       </Menu.Dropdown>
 
