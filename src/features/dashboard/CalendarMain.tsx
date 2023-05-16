@@ -6,76 +6,77 @@ import { CalendarMenu } from "./CalendarMenu";
 import { CalendarTodos } from "./CalendarTodos";
 import { useSession } from "next-auth/react";
 import { api } from "../../utils/api";
+import { nanoid } from "nanoid";
 
-const placeholder_calendarList = [
-  {
-    name: "Schedule 1",
-    uuid: 1,
-    data: [
-      {
-        //TODO: setScheduleData to .filter() when delete in handleScheduleChange()
-        Subject: "Schedule 1",
-        StartTime: "2023-05-07T18:00:00.000Z",
-        EndTime: "2023-05-08T03:00:00.000Z",
-        IsAllDay: false,
-        StartTimezone: null,
-        EndTimezone: null,
-        Description: "Test Schedule\n",
-        RecurrenceRule: "FREQ=WEEKLY;BYDAY=MO;INTERVAL=1;",
-        Id: 2,
-        Guid: "e85c76aa-aaeb-afe0-a9af-51bfe8faa079",
-        RecurrenceID: 1,
-        RecurrenceException: "20230507T180000Z",
-        FollowingID: null,
-      },
-      {
-        Subject: "Test Schedule",
-        Location: "Ha Noi",
-        StartTime: "2023-05-09T20:00:00.000Z",
-        EndTime: "2023-05-09T21:30:00.000Z",
-        IsAllDay: false,
-        StartTimezone: null,
-        EndTimezone: null,
-        Description: "Schedule for testing",
-        RecurrenceRule: "FREQ=WEEKLY;BYDAY=WE;INTERVAL=1;",
-        Id: 4,
-        Guid: "e9d7eda7-8f19-9e52-6b02-599a01588930",
-        RecurrenceID: 3,
-        RecurrenceException: "20230509T200000Z",
-        FollowingID: null,
-      },
-    ],
-  },
-  {
-    name: "Schedule 2",
-    uuid: 2,
-    data: [
-      {
-        Subject: "Schedule of test",
-        StartTime: "2023-05-07T18:00:00.000Z",
-        EndTime: "2023-05-08T03:00:00.000Z",
-        IsAllDay: false,
-        StartTimezone: null,
-        EndTimezone: null,
-        Description: "Test Schedule\n",
-        RecurrenceRule: "FREQ=WEEKLY;BYDAY=MO;INTERVAL=1;",
-        Id: 2,
-        Guid: "e85c76aa-aaeb-afe0-a9af-51bfe8faa079",
-        RecurrenceID: 1,
-        RecurrenceException: "20230507T180000Z",
-        FollowingID: null,
-      },
-    ],
-  },
-  {
-    name: "Schedule 3",
-    uuid: 3,
-    data: [],
-  },
-];
+// const placeholder_calendarList = [
+//   {
+//     name: "Schedule 1",
+//     uuid: 1,
+//     data: [
+//       {
+//         //TODO: setScheduleData to .filter() when delete in handleScheduleChange()
+//         Subject: "Schedule 1",
+//         StartTime: "2023-05-07T18:00:00.000Z",
+//         EndTime: "2023-05-08T03:00:00.000Z",
+//         IsAllDay: false,
+//         StartTimezone: null,
+//         EndTimezone: null,
+//         Description: "Test Schedule\n",
+//         RecurrenceRule: "FREQ=WEEKLY;BYDAY=MO;INTERVAL=1;",
+//         Id: 2,
+//         Guid: "e85c76aa-aaeb-afe0-a9af-51bfe8faa079",
+//         RecurrenceID: 1,
+//         RecurrenceException: "20230507T180000Z",
+//         FollowingID: null,
+//       },
+//       {
+//         Subject: "Test Schedule",
+//         Location: "Ha Noi",
+//         StartTime: "2023-05-09T20:00:00.000Z",
+//         EndTime: "2023-05-09T21:30:00.000Z",
+//         IsAllDay: false,
+//         StartTimezone: null,
+//         EndTimezone: null,
+//         Description: "Schedule for testing",
+//         RecurrenceRule: "FREQ=WEEKLY;BYDAY=WE;INTERVAL=1;",
+//         Id: 4,
+//         Guid: "e9d7eda7-8f19-9e52-6b02-599a01588930",
+//         RecurrenceID: 3,
+//         RecurrenceException: "20230509T200000Z",
+//         FollowingID: null,
+//       },
+//     ],
+//   },
+//   {
+//     name: "Schedule 2",
+//     uuid: 2,
+//     data: [
+//       {
+//         Subject: "Schedule of test",
+//         StartTime: "2023-05-07T18:00:00.000Z",
+//         EndTime: "2023-05-08T03:00:00.000Z",
+//         IsAllDay: false,
+//         StartTimezone: null,
+//         EndTimezone: null,
+//         Description: "Test Schedule\n",
+//         RecurrenceRule: "FREQ=WEEKLY;BYDAY=MO;INTERVAL=1;",
+//         Id: 2,
+//         Guid: "e85c76aa-aaeb-afe0-a9af-51bfe8faa079",
+//         RecurrenceID: 1,
+//         RecurrenceException: "20230507T180000Z",
+//         FollowingID: null,
+//       },
+//     ],
+//   },
+//   {
+//     name: "Schedule 3",
+//     uuid: 3,
+//     data: [],
+//   },
+// ];
 
 export const CalendarMain = () => {
-  const [calendarList, setCalendarList] = useState(placeholder_calendarList);
+  const [calendarList, setCalendarList] = useState([]);
 
   const { data: session } = useSession();
   const {
@@ -96,7 +97,7 @@ export const CalendarMain = () => {
     if (userCalendar) {
       const userCalendarWithUUID = userCalendar.map((item) => ({
         ...item,
-        uuid: item.id,
+        uuid: nanoid(),
         data: item.schedule,
       }));
 
@@ -104,7 +105,7 @@ export const CalendarMain = () => {
     }
   }, [userCalendar]);
 
-  // console.log(calendarList);
+  console.log(calendarList);
 
   return (
     <Box

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -7,14 +8,29 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconPencil, IconPlus } from "@tabler/icons";
 import react, { useState } from "react";
 import { CreateScheduleModal } from "../../layouts/components/CreateScheduleModal";
+import { useSession } from "next-auth/react";
+import { api } from "../../utils/api";
+import { showNotification } from "@mantine/notifications";
 
 export const CalendarMenu = (props) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [isEditingCalendarList, setIsEditingCalendarList] = useState(false);
 
-  const handleDeleteCalendar = (event, id) => {
+  const { data: session } = useSession();
+  const { mutateAsync: apiDelete } = api.calendar.deleteCalendar.useMutation();
+
+  const handleDeleteCalendar = async (event, id) => {
     event.stopPropagation();
     console.log(`deleted ${id}`);
+
+    await apiDelete({
+      id: id,
+    });
+    props.refetchFunc();
+    showNotification({
+      color: "green",
+      message: "Delete calendar successfully",
+    });
   };
 
   const renderCalendars = () => {
@@ -49,7 +65,7 @@ export const CalendarMenu = (props) => {
           </Box>
           {isEditingCalendarList ? (
             <CloseButton
-              onClick={(e) => handleDeleteCalendar(e, calendar.uuid)}
+              onClick={(e) => void handleDeleteCalendar(e, calendar.uuid)}
             />
           ) : (
             <></>

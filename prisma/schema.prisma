@@ -146,7 +146,7 @@ model Schedule {
  
     createdAt      DateTime @default(now())
     updatedAt      DateTime @updatedAt
-    calendar       Calendar  @relation(fields: [calendarId], references: [id])
+    calendarOfSchedule       Calendar  @relation(fields: [calendarId], references: [id])
 }
 
 model Todo {
