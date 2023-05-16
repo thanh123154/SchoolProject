@@ -2,15 +2,33 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const CalendarRouter = createTRPCRouter({
-  getAllCalendar: protectedProcedure.input(z.object({})).query(({ ctx }) => {
-    return ctx.prisma.calendar.findMany({
-      include: {
-        schedule: true,
-      },
-    });
-  }),
+  getAllCalendarByHostId: protectedProcedure
+    .input(
+      z.object({
+        hostId: z.string(),
+      })
+    )
+    .query(({ input: { hostId }, ctx }) => {
+      return ctx.prisma.calendar.findMany({
+        where: { hostId },
+        include: {
+          schedule: true,
+        },
+      });
+    }),
 
   createCalendar: protectedProcedure
+    .input(
+      z.object({
+        hostId: z.string(),
+        name: z.string(),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.calendar.create({ data: { ...input } });
+    }),
+
+  createSchedule: protectedProcedure
     .input(
       z.object({
         id: z.string(),

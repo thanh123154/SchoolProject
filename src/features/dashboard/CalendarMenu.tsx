@@ -65,7 +65,12 @@ export const CalendarMenu = (props) => {
   };
   return (
     <>
-      <CreateScheduleModal opened={opened} open={open} close={close} />
+      <CreateScheduleModal
+        refetchFunc={props.refetchFunc}
+        opened={opened}
+        open={open}
+        close={close}
+      />
       <Box
         sx={(theme) => ({
           backgroundColor: theme.colorScheme === "dark" ? "#2a2a2b" : "#808080",

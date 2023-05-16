@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Box, Paper } from "@mantine/core";
 import react, { useEffect, useState } from "react";
 import {

@@ -1,21 +1,34 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import {
-  Box,
-  Button,
-  CloseButton,
-  Modal,
-  Paper,
-  TextInput,
-} from "@mantine/core";
-import react, { useState } from "react";
+import { Box, Button, CloseButton, Modal, TextInput } from "@mantine/core";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { api } from "../../utils/api";
+import { showNotification } from "@mantine/notifications";
 
 export const CreateScheduleModal = (props) => {
   const [scheduleName, setScheduleName] = useState("");
+  const { data: session } = useSession();
+  const { mutateAsync: apiCreate } = api.calendar.createCalendar.useMutation();
 
-  const handleCreateNewSchedule = (scheduleName: string) => {
+  const handleCreateNewSchedule = async (scheduleName: string) => {
     if (!scheduleName) return;
 
     console.log(scheduleName);
+    const createCalendarData = {
+      name: scheduleName,
+    };
+    await apiCreate({
+      hostId: session?.user?.id || "",
+      ...createCalendarData,
+    });
+
+    showNotification({
+      color: "green",
+      message: "Create calendar successfully",
+    });
+    props.refetchFunc();
     props.close();
     setScheduleName("");
   };
@@ -51,7 +64,7 @@ export const CreateScheduleModal = (props) => {
             })}
             color="dark"
             variant="white"
-            onClick={() => handleCreateNewSchedule(scheduleName)}
+            onClick={() => void handleCreateNewSchedule(scheduleName)}
           >
             Create
           </Button>

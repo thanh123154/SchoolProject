@@ -1,5 +1,6 @@
-import { Box, Flex, Grid } from "@mantine/core";
-import react, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { Box, Flex, Grid, LoadingOverlay } from "@mantine/core";
+import react, { useEffect, useState } from "react";
 import { CalendarScheduler } from "./CalendarScheduler";
 import { CalendarMenu } from "./CalendarMenu";
 import { CalendarTodos } from "./CalendarTodos";
@@ -74,9 +75,6 @@ const placeholder_calendarList = [
 ];
 
 export const CalendarMain = () => {
-  const [selectedSchedule, setSelectedSchedule] = useState(
-    placeholder_calendarList[0]
-  );
   const [calendarList, setCalendarList] = useState(placeholder_calendarList);
 
   const { data: session } = useSession();
@@ -84,13 +82,30 @@ export const CalendarMain = () => {
     data: userCalendar,
     isLoading,
     refetch,
-  } = api.calendar.getAllCalendar.useQuery(
-    { id: session?.user?.id || "" },
+  } = api.calendar.getAllCalendarByHostId.useQuery(
+    { hostId: session?.user?.id || "" },
+
     { enabled: !!session?.user?.id, refetchOnWindowFocus: false }
   );
-  //   const { mutateAsync: apiUpdate } = api.user.update.useMutation();
 
-  console.log(userCalendar, "data");
+  const [selectedSchedule, setSelectedSchedule] = useState(
+    userCalendar && userCalendar.length > 0 ? userCalendar[0] : null
+  );
+
+  useEffect(() => {
+    if (userCalendar) {
+      const userCalendarWithUUID = userCalendar.map((item) => ({
+        ...item,
+        uuid: item.id,
+        data: item.schedule,
+      }));
+
+      setCalendarList(userCalendarWithUUID);
+    }
+  }, [userCalendar]);
+
+  // console.log(calendarList);
+
   return (
     <Box
       sx={{
@@ -99,7 +114,9 @@ export const CalendarMain = () => {
         gridTemplateColumns: "auto 1fr 20%",
       }}
     >
+      <LoadingOverlay visible={isLoading} />
       <CalendarMenu
+        refetchFunc={refetch}
         calendarList={calendarList}
         _setSelectedSchedule={setSelectedSchedule}
         selectedSchedule={selectedSchedule}
