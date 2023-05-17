@@ -18,10 +18,16 @@ export const CalendarMenu = (props) => {
 
   const { data: session } = useSession();
   const { mutateAsync: apiDelete } = api.calendar.deleteCalendar.useMutation();
+  const { mutateAsync: apiDeleteAllSchedule } =
+    api.calendar.deleteAllSchedule.useMutation();
 
   const handleDeleteCalendar = async (event, id) => {
     event.stopPropagation();
     console.log(`deleted ${id}`);
+
+    await apiDeleteAllSchedule({
+      CalendarId: `${id}`,
+    });
 
     await apiDelete({
       id: `${id}`,
@@ -65,7 +71,7 @@ export const CalendarMenu = (props) => {
           </Box>
           {isEditingCalendarList ? (
             <CloseButton
-              onClick={(e) => void handleDeleteCalendar(e, calendar.uuid)}
+              onClick={(e) => void handleDeleteCalendar(e, calendar.id)}
             />
           ) : (
             <></>

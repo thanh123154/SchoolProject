@@ -91,6 +91,18 @@ export const CalendarRouter = createTRPCRouter({
       });
     }),
 
+  deleteAllSchedule: protectedProcedure
+    .input(
+      z.object({
+        CalendarId: z.string(),
+      })
+    )
+    .mutation(({ ctx, input: { CalendarId } }) => {
+      return ctx.prisma.schedule.deleteMany({
+        where: { CalendarId: CalendarId },
+      });
+    }),
+
   deleteSchedule: protectedProcedure
     .input(
       z.object({
