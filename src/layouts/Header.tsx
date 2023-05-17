@@ -74,6 +74,9 @@ const _Header = () => {
               <Link href={"/pomodoro"}>
                 <Title fz={16}>Pomodoro</Title>
               </Link>
+              <Link href={"/entertainments"}>
+                <Title fz={16}>Entertainments</Title>
+              </Link>
             </Box>
             {/* <NavMenu /> */}
             {/* <SearchBarSpecial index={1} /> */}
