@@ -120,6 +120,7 @@ export const CalendarMain = () => {
         };
       });
       setCalendarList(userCalendarWithUUID);
+      setSelectedSchedule(userCalendarWithUUID[0]);
     }
   }, [userCalendar]);
 

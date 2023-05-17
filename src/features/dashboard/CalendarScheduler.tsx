@@ -35,10 +35,68 @@ export const CalendarScheduler = (props) => {
   const { mutateAsync: apiUpdateSchedule } =
     api.calendar.updateSchedule.useMutation();
 
+  const { mutateAsync: apiDelete } = api.calendar.deleteSchedule.useMutation();
+
   const handleScheduleChange = async (event) => {
     if (event.requestType == "dateNavigate") return;
-    console.log(event);
-    if (event.addedRecords?.length > 0 && props.selectedSchedule.id) {
+    console.log(event, "event");
+
+    if (
+      event.changedRecords?.length === 0 &&
+      event.addedRecords?.length === 0
+    ) {
+      const createScheduleData = event.data[0];
+      const createScheduleData2 = event.deletedRecords[0];
+
+      await apiDelete({
+        id: `${
+          !!createScheduleData ? createScheduleData.id : createScheduleData2.id
+        }`,
+      });
+
+      showNotification({
+        color: "green",
+        message: "Delete schedule successfully",
+      });
+      props.refetchFunc();
+    }
+
+    if (event.changedRecords?.length > 0) {
+      console.log({ changedRecords: event.changedRecords });
+      const createScheduleData = event.changedRecords[0];
+      console.log(createScheduleData, "update data");
+      const data = {
+        id: `${createScheduleData.id}`,
+        EndTime: createScheduleData.EndTime,
+        StartTime: createScheduleData.StartTime,
+        Subject: createScheduleData.Subject,
+        IsAllDay: createScheduleData.IsAllDay,
+        // StartTimezone: createScheduleData.StartTimezone || moment().toDate(),
+        // EndTimezone: createScheduleData.EndTimezone || moment().toDate(),
+        Description: createScheduleData.Description || "",
+        RecurrenceRule:
+          createScheduleData.RecurrenceRule ||
+          "FREQ=WEEKLY;BYDAY=WE;INTERVAL=1;",
+        Guid: createScheduleData.Guid || "",
+        RecurrenceID: createScheduleData.RecurrenceID || createScheduleData.Id,
+        RecurrenceException:
+          createScheduleData.RecurrenceException || "20230509T200000Z",
+        FollowingID: createScheduleData.FollowingID || nanoid(),
+      };
+      await apiUpdateSchedule({
+        ...data,
+      });
+      showNotification({
+        color: "green",
+        message: "Update schedule successfully",
+      });
+      props.refetchFunc();
+    }
+    if (
+      event.addedRecords?.length > 0 &&
+      props.selectedSchedule.id &&
+      event.changedRecords?.length === 0
+    ) {
       const createScheduleData = event.addedRecords[0];
       console.log({ addedRecords: event.addedRecords });
 
@@ -70,40 +128,6 @@ export const CalendarScheduler = (props) => {
       });
       props.refetchFunc();
     }
-    if (event.deletedRecords?.length > 0) {
-      console.log({ deletedRecords: event.deletedRecords }, "deleted records");
-    }
-    if (event.changedRecords?.length > 0) {
-      console.log({ changedRecords: event.changedRecords });
-      const createScheduleData = event.changedRecords[0];
-      console.log(createScheduleData, "update data");
-      const data = {
-        id: `${createScheduleData.id}`,
-        EndTime: createScheduleData.EndTime,
-        StartTime: createScheduleData.StartTime,
-        Subject: createScheduleData.Subject,
-        IsAllDay: createScheduleData.IsAllDay,
-        // StartTimezone: createScheduleData.StartTimezone || moment().toDate(),
-        // EndTimezone: createScheduleData.EndTimezone || moment().toDate(),
-        Description: createScheduleData.Description || "",
-        RecurrenceRule:
-          createScheduleData.RecurrenceRule ||
-          "FREQ=WEEKLY;BYDAY=WE;INTERVAL=1;",
-        Guid: createScheduleData.Guid || "",
-        RecurrenceID: createScheduleData.RecurrenceID || createScheduleData.Id,
-        RecurrenceException:
-          createScheduleData.RecurrenceException || "20230509T200000Z",
-        FollowingID: createScheduleData.FollowingID || nanoid(),
-      };
-      await apiUpdateSchedule({
-        ...data,
-      });
-      showNotification({
-        color: "green",
-        message: "UPdate schedule successfully",
-      });
-      props.refetchFunc();
-    }
   };
 
   const eventSettings = {
@@ -114,6 +138,7 @@ export const CalendarScheduler = (props) => {
   return (
     <ScheduleComponent
       actionComplete={(e) => void handleScheduleChange(e)}
+      dragStop={(e) => console.log(e, "drag complete")}
       eventSettings={eventSettings}
       allowDragAndDrop={true}
     >
