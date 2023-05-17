@@ -98,7 +98,7 @@ export const CalendarScheduler = (props) => {
       event.changedRecords?.length === 0
     ) {
       const createScheduleData = event.addedRecords[0];
-      console.log({ addedRecords: event.addedRecords });
+      console.log({ addedRecords: event.addedRecords }, "addedRecords");
 
       const data = {
         // id: Math.round(Math.random() * 1000000),

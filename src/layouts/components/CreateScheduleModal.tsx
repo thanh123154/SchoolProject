@@ -37,7 +37,7 @@ export const CreateScheduleModal = (props) => {
     <Modal
       opened={props.opened}
       onClose={props.close}
-      title="Create New Schedule"
+      title="Create New Calendar"
       centered
     >
       <Box
@@ -50,7 +50,7 @@ export const CreateScheduleModal = (props) => {
         <TextInput
           value={scheduleName}
           onChange={(event) => setScheduleName(event.currentTarget.value)}
-          placeholder="Schedule Name..."
+          placeholder="Calendar Name..."
           rightSection={
             scheduleName && <CloseButton onClick={() => setScheduleName("")} />
           }

@@ -24,7 +24,7 @@ export const CalendarMenu = (props) => {
     console.log(`deleted ${id}`);
 
     await apiDelete({
-      id: id,
+      id: `${id}`,
     });
     props.refetchFunc();
     showNotification({
