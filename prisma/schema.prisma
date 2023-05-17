@@ -128,25 +128,26 @@ model Calendar {
 }
 
 model Schedule {
-    id             String   @id @default(cuid())
-    calendarId     String
+    id             Int   @id @default(autoincrement())
+    CalendarId     String
 
     Subject        String
     StartTime      DateTime 
     EndTime        DateTime 
     IsAllDay       Boolean
-    StartTimezone  DateTime
-    EndTimezone    DateTime
+    StartTimezone  DateTime? 
+    EndTimezone    DateTime?
     Description    String
     RecurrenceRule String
     Guid           String
     RecurrenceID   Float
     RecurrenceException    String
-    FollowingID            String
+    FollowingID            String?
+    Location        String?
  
     createdAt      DateTime @default(now())
     updatedAt      DateTime @updatedAt
-    calendarOfSchedule       Calendar  @relation(fields: [calendarId], references: [id])
+    calendarOfSchedule       Calendar  @relation(fields: [CalendarId], references: [id])
 }
 
 model Todo {

@@ -31,14 +31,15 @@ export const CalendarRouter = createTRPCRouter({
   createSchedule: protectedProcedure
     .input(
       z.object({
-        id: z.string(),
-        calendarId: z.string(),
+        id: z.string().optional(),
+        CalendarId: z.string(),
         Subject: z.string(),
         StartTime: z.date(),
         EndTime: z.date(),
         IsAllDay: z.boolean(),
-        StartTimezone: z.date(),
-        EndTimezone: z.date(),
+        Location: z.string().optional(),
+        StartTimezone: z.date().optional(),
+        EndTimezone: z.date().optional(),
         Description: z.string(),
         RecurrenceRule: z.string(),
         Guid: z.string(),
@@ -54,11 +55,13 @@ export const CalendarRouter = createTRPCRouter({
   updateSchedule: protectedProcedure
     .input(
       z.object({
-        calendarId: z.string(),
+        id: z.string(),
+        CalendarId: z.string().optional(),
         Subject: z.string().optional(),
         StartTime: z.date().optional(),
         EndTime: z.date().optional(),
         IsAllDay: z.boolean().optional(),
+        Location: z.string().optional(),
         StartTimezone: z.date().optional(),
         EndTimezone: z.date().optional(),
         Description: z.string().optional(),
@@ -71,7 +74,7 @@ export const CalendarRouter = createTRPCRouter({
     )
     .mutation(({ input, ctx }) => {
       return ctx.prisma.schedule.update({
-        where: { id: input.calendarId },
+        where: { id: input.id },
         data: input,
       });
     }),
