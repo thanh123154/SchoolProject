@@ -2,36 +2,30 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const TodoRouter = createTRPCRouter({
-  getAllTodo: protectedProcedure
+  getAllTodoByHostId: protectedProcedure
     .input(
       z.object({
-        name: z.string().optional(),
+        hostId: z.string(),
       })
     )
-    .query(({ ctx, input: { name } }) => {
-      return ctx.prisma.listing.findMany({
-        where: {
-          approved: false,
-          name: {
-            contains: name,
-          },
-          active: true,
-        },
+    .query(({ input: { hostId }, ctx }) => {
+      return ctx.prisma.todo.findMany({
+        where: { hostId },
       });
     }),
 
-  createTodo: protectedProcedure
-    .input(
-      z.object({
-        id: z.string(),
-        task: z.string(),
-        priority: z.string(),
-        isCompleted: z.boolean(),
-      })
-    )
-    .mutation(({ ctx, input }) => {
-      return ctx.prisma.todo.create({ data: { ...input } });
-    }),
+  // createTodo: protectedProcedure
+  //   .input(
+  //     z.object({
+  //       id: z.string(),
+  //       task: z.string(),
+  //       priority: z.string(),
+  //       isCompleted: z.boolean(),
+  //     })
+  //   )
+  //   .mutation(({ ctx, input }) => {
+  //     return ctx.prisma.todo.create({ data: { ...input } });
+  //   }),
 
   deleteTodo: protectedProcedure
     .input(

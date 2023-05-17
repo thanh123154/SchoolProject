@@ -82,6 +82,7 @@ model User {
     booking     booking[]
     wishList    wishList[]
     calendar    Calendar[]
+    todo        Todo[]
 }
 
 model Listing {
@@ -128,7 +129,7 @@ model Calendar {
 }
 
 model Schedule {
-    id             Int   @id @default(autoincrement())
+    id             String   @id @default(cuid())
     CalendarId     String
 
     Subject        String
@@ -155,9 +156,13 @@ model Todo {
     task           String
     priority       String   
     isCompleted    Boolean
+    hostId         String
+
 
     createdAt      DateTime @default(now())
     updatedAt      DateTime @updatedAt
+    host           User             @relation(fields: [hostId], references: [id])
+
 }
 
 
