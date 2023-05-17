@@ -147,10 +147,25 @@ export const CalendarMain = () => {
           // width: "100%"
         })}
       >
-        <CalendarScheduler
-          refetchFunc={refetch}
-          selectedSchedule={selectedSchedule}
-        />
+        {
+          calendarList.length > 0 ? (
+            <CalendarScheduler
+              refetchFunc={refetch}
+              selectedSchedule={selectedSchedule}
+            />
+          ) : (
+            <Box sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "calc(100vh - 79px)",
+            }}>
+              <Box sx={{fontSize: "2.5rem", fontWeight: 700}}>You currently have no calendar!</Box>
+              <Box sx={{fontSize: "1,5em"}}>Press create to make one</Box>
+            </Box>
+          )
+        }
       </Box>
       <CalendarTodos />
     </Box>
