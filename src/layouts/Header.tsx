@@ -69,13 +69,13 @@ const _Header = () => {
                 <Title fz={30}>SCHOOL UTILS</Title>
               </Link>
               <Link href={"/flashCards"}>
-                <Title fz={16}>Flash Cards</Title>
+                <Title fz={16} sx={{":hover": {opacity: "60%"}, transition: "ease-in-out 250ms"}}>Flash Cards</Title>
               </Link>
               <Link href={"/pomodoro"}>
-                <Title fz={16}>Pomodoro</Title>
+                <Title fz={16} sx={{":hover": {opacity: "60%"}, transition: "ease-in-out 250ms"}}>Pomodoro</Title>
               </Link>
               <Link href={"/entertainments"}>
-                <Title fz={16}>Entertainments</Title>
+                <Title fz={16} sx={{":hover": {opacity: "60%"}, transition: "ease-in-out 250ms"}}>Entertainments</Title>
               </Link>
             </Box>
             {/* <NavMenu /> */}
