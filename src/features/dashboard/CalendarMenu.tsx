@@ -21,6 +21,9 @@ export const CalendarMenu = (props) => {
   const { mutateAsync: apiDeleteAllSchedule } =
     api.calendar.deleteAllSchedule.useMutation();
 
+  const { mutateAsync: apiDeleteManyTodo } =
+    api.todo.deleteManyTodo.useMutation();
+
   const handleDeleteCalendar = async (event, id) => {
     event.stopPropagation();
     console.log(`deleted ${id}`);
@@ -32,6 +35,21 @@ export const CalendarMenu = (props) => {
     await apiDelete({
       id: `${id}`,
     });
+    props.refetchFunc();
+    showNotification({
+      color: "green",
+      message: "Delete calendar successfully",
+    });
+  };
+
+  const handleDeleteManyTodo = async (event, id) => {
+    event.stopPropagation();
+    console.log(`deleted ${id}`);
+
+    await apiDeleteManyTodo({
+      CalendarId: `${id}`,
+    });
+
     props.refetchFunc();
     showNotification({
       color: "green",

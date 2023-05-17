@@ -1,11 +1,12 @@
 import { Box, Checkbox, Flex, Button, LoadingOverlay } from "@mantine/core";
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 import { TodoCard } from "../../layouts/components/TodoCard";
 import { IconPencil, IconPlus } from "@tabler/icons";
 import { useDisclosure } from "@mantine/hooks";
 import { CreateTodoModal } from "../../layouts/components/CreateTodoModal";
 import { api } from "../../utils/api";
 import { useSession } from "next-auth/react";
+import { nanoid } from "nanoid";
 
 const Dummy_TodoList = [
   {
@@ -68,6 +69,16 @@ export const CalendarTodos = () => {
 
     { enabled: !!session?.user?.id, refetchOnWindowFocus: false }
   );
+  // const deletedCompleted = async () => {
+  //   const TodosToDelete = todoList.filter((todo) => todo.isCompleted === true);
+  //   console.log(TodosToDelete);
+  // };
+
+  useEffect(() => {
+    if (userTodo) {
+      setTodoList(userTodo);
+    }
+  }, [userTodo]);
 
   console.log(userTodo, "data todo");
 
@@ -75,7 +86,7 @@ export const CalendarTodos = () => {
     return todoList.map((todo) => {
       return (
         <Box
-          key={todo.uuid}
+          key={nanoid()}
           sx={(theme) => ({
             display: "flex",
             flexDirection: "column",
@@ -83,14 +94,23 @@ export const CalendarTodos = () => {
           })}
         >
           <LoadingOverlay visible={isLoading} />
-          <TodoCard todo={todo} isEditingTodo={isEditingTodoList} />
+          <TodoCard
+            refetch={refetch}
+            todo={todo}
+            isEditingTodo={isEditingTodoList}
+          />
         </Box>
       );
     });
   };
   return (
     <>
-      <CreateTodoModal opened={opened} open={open} close={close} />
+      <CreateTodoModal
+        refetch={refetch}
+        opened={opened}
+        open={open}
+        close={close}
+      />
       <Box
         sx={(theme) => ({
           backgroundColor: theme.colorScheme === "dark" ? "#2a2a2b" : "#808080",
@@ -107,7 +127,7 @@ export const CalendarTodos = () => {
           <Flex justify="space-between" align="center">
             <div>To Dos</div>
             <Box sx={{ display: "flex", gap: "8px" }}>
-              {isEditingTodoList && (
+              {/* {isEditingTodoList && (
                 <Button
                   sx={{
                     borderRadius: "8px",
@@ -120,11 +140,11 @@ export const CalendarTodos = () => {
                   color="red"
                   uppercase={false}
                   variant="outline"
-                  onClick={() => console.log("delete completed")}
+                  // onClick={() => void deletedCompleted()}
                 >
                   Delete Completed
                 </Button>
-              )}
+              )} */}
               <Button
                 sx={(theme) => ({
                   borderRadius: "8px",

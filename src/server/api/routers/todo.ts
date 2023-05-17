@@ -14,18 +14,33 @@ export const TodoRouter = createTRPCRouter({
       });
     }),
 
-  // createTodo: protectedProcedure
-  //   .input(
-  //     z.object({
-  //       id: z.string(),
-  //       task: z.string(),
-  //       priority: z.string(),
-  //       isCompleted: z.boolean(),
-  //     })
-  //   )
-  //   .mutation(({ ctx, input }) => {
-  //     return ctx.prisma.todo.create({ data: { ...input } });
-  //   }),
+  createTodo: protectedProcedure
+    .input(
+      z.object({
+        hostId: z.string(),
+        task: z.string(),
+        priority: z.string(),
+        isCompleted: z.boolean(),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.todo.create({ data: { ...input } });
+    }),
+  updateTodo: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        isCompleted: z.boolean().optional(),
+        task: z.string().optional(),
+        priority: z.string().optional(),
+      })
+    )
+    .mutation(({ input, ctx }) => {
+      return ctx.prisma.todo.update({
+        where: { id: input.id },
+        data: input,
+      });
+    }),
 
   deleteTodo: protectedProcedure
     .input(
