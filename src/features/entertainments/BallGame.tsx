@@ -12,7 +12,7 @@ declare global {
   }
 }
 
-export default function SlingshotGame() {
+export default function BallGame(props) {
   const canvas = useRef(null)
   const world = useRef<Matter.World>()
   const engineRef = useRef<Matter.Engine>()
@@ -36,8 +36,8 @@ export default function SlingshotGame() {
     }
   }, [canvas, world])
 
-  const WIDTH = 1000
-  const HEIGHT = 700
+  const WIDTH = 1388
+  const HEIGHT = 882
 
   function createWorld() {
     const engine = Engine.create()
@@ -53,7 +53,7 @@ export default function SlingshotGame() {
       options: {
         width: WIDTH,
         height: HEIGHT,
-        background: '#ffffff',
+        background: '#5c5c5c',
         showCollisions: false,
         showVelocity: false,
         showAxes: false,
@@ -192,12 +192,12 @@ export default function SlingshotGame() {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center'>
-      <canvas className='bg-gray-700' ref={canvas} />
-      <div className='mx-3 border select-none border-indigo-600p-3'>
+    <div>
+      <canvas ref={canvas} />
+      {/* <div className='mx-3 border select-none border-indigo-600p-3'>
         bodies count: {objectsCount}
       </div>
-      <div className='mx-3 border select-none border-indigo-600p-3'>fps: {fps}</div>
+      <div className='mx-3 border select-none border-indigo-600p-3'>fps: {fps}</div> */}
     </div>
   )
 }

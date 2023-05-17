@@ -8,10 +8,32 @@ import { FlashCardMenu } from "../features/flashCards/FlashCardMenu";
 import react, { useState } from 'react'
 import { FlashCardList } from "../features/flashCards/FlashCardList";
 import SlingshotGame from "../features/entertainments/SlingshotGame";
+import { EntertainmentsMenu } from "../features/entertainments/EntertainmentsMenu";
+import BallGame from "../features/entertainments/BallGame";
 
 
 const Entertainments: NextPage = () => {
+  const [games, setGames] = useState([
+    {
+      id: "1",
+      name: "Ball Game"
+    },
+    {
+      id: "2",
+      name: "Slingshot Game"
+    },
+  ])
+  const [selectedGames, setSelectedGames] = useState(games[0])
   const { data: sessionData } = useSession();
+
+  const gamesToRender = () => {
+    switch(selectedGames?.id) {
+      case "1":
+        return <BallGame width={1000} height={700} />
+      case "2":
+        return <SlingshotGame />
+    }
+  }
 
   return (
     <>
@@ -25,11 +47,11 @@ const Entertainments: NextPage = () => {
 
       <Box sx={{
         minHeight: "calc(100vh - 79px)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        display: "grid",
+        gridTemplateColumns: "auto 1fr"
       }}>
-        <SlingshotGame />
+        <EntertainmentsMenu games={games} _setSelectedGame={setSelectedGames} selectedGame={selectedGames}/>
+        {gamesToRender()}
       </Box>
     </>
   );
